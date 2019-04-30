@@ -41,7 +41,7 @@ class HGUCoursePatternAnalyzer {
         System.out.println("Number of All Students: " + numOfStudents);
  
         for(int t = 0; t < students.length; t++)
-        {
+        { 
         	cnt = t;
         	if(!(studentExist(students, students[t])))
         	{
