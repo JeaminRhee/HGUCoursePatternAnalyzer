@@ -18,12 +18,12 @@ class HGUCoursePatternAnalyzer {
             "2019-1, SJ Kim, Logic Design",
             "2019-1, SJ Kim, Algorithm Analysis",
             };
-
-    private int numOfStudents;
-    private int numOfCourses;
-    Student[] students;
-    Course[] courses;
-    public int cnt;
+    
+    private int numOfStudents;			//number of students. received by passing arguments
+    private int numOfCourses;			//number of courses. received by passing arguments.
+    Student[] students;					//instance array of Student class
+    Course[] courses;					//instance array of Course class
+    int cnt;							
 
     /**
      * This method runs our analysis logic to get the list of student and course
@@ -32,29 +32,30 @@ class HGUCoursePatternAnalyzer {
      * @param args
      */
     public void run(String[] args) {
-        numOfStudents = Integer.parseInt(args[0]);
-        numOfCourses = Integer.parseInt(args[1]);
+        numOfStudents = Integer.parseInt(args[0]); //receiving the first argument
+        numOfCourses = Integer.parseInt(args[1]); //receiving the second argument
 
-        initiateStudentArrayFromLines(lines);
-        initiateCourseArrayFromLines(lines);
-
+        initiateStudentArrayFromLines(lines); // initializing Student class's instance array
+        initiateCourseArrayFromLines(lines);  // initializing Course class's instance array
+        
         System.out.println("Number of All Students: " + numOfStudents);
  
         for(int t = 0; t < students.length; t++)
         { 
         	cnt = t;
-        	if(!(studentExist(students, students[t])))
+        	if(!(studentExist(students, students[t])))	//check if there's duplicate student instance
         	{
-        		System.out.println(students[t].getName());
+        		System.out.println(students[t].getName()); //if there's not, print out the name of the student.
         	}
         }
+        
         System.out.println("Number of All Courses: " + numOfCourses);
         for(int t = 0; t < courses.length; t++)
         {
         	cnt = t;
-        	if(!(courseExist(courses, courses[t])))
+        	if(!(courseExist(courses, courses[t])))	//check if there's duplicate course instance
         	{
-        		System.out.println(courses[t].getCourseName());
+        		System.out.println(courses[t].getCourseName());//if there's not, print out the name of the course.
         	}
         }
     }
@@ -69,7 +70,7 @@ class HGUCoursePatternAnalyzer {
     private Student[] initiateStudentArrayFromLines(String[] lines) {
     	students = new Student[lines.length];
         for (int i = 0; i < lines.length; i++) {
-            students[i] = new Student(lines[i].substring(lines[i].indexOf(", ")+2, lines[i].lastIndexOf(", ")));
+            students[i] = new Student(lines[i].substring(lines[i].indexOf(", ")+2, lines[i].lastIndexOf(", ")));//trimming string by using substring so I can get student name
         }
         return null;
     }
@@ -83,13 +84,13 @@ class HGUCoursePatternAnalyzer {
      * @return boolean
      */
     private boolean studentExist(Student[] students, Student student) {
-    	for(int i = cnt-1; i > -1; i--)
+    	for(int i = cnt-1; i > -1; i--) //check array index from 'cnt-1' to -1
     	{
-    		if(students[i].getName().equals(student.getName()))
+    		if(students[i].getName().equals(student.getName()))		//if there's duplicate in existing array
     		{
     			return true;
    			}
-    		else
+    		else		//if there's no duplicate in existing array
     		{
     			continue;
     		}
@@ -108,7 +109,7 @@ class HGUCoursePatternAnalyzer {
     private Course[] initiateCourseArrayFromLines(String[] lines) {
         courses= new Course[lines.length];
         for (int i = 0; i < lines.length; i++) {
-            courses[i] = new Course(lines[i].substring(lines[i].lastIndexOf(", ")+2, lines[i].length()));
+            courses[i] = new Course(lines[i].substring(lines[i].lastIndexOf(", ")+2, lines[i].length())); //trimming string by using substring so I can get course name
         }
         
         for (int i = 0; i < courses.length; i++) {
@@ -127,13 +128,13 @@ class HGUCoursePatternAnalyzer {
      * @return boolean
      */
     private boolean courseExist(Course[] courses, Course course) {
-    	for(int i = cnt-1; i > -1; i--)
+    	for(int i = cnt-1; i > -1; i--) //check array index from 'cnt-1' to -1
     	{
-    		if(courses[i].getCourseName().equals(course.getCourseName()))
+    		if(courses[i].getCourseName().equals(course.getCourseName()))		//if there's duplicate in existing array
     		{
     			return true;
    			}
-    		else
+    		else		//if there's no duplicate in existing array
     		{
     			continue;
     		}
